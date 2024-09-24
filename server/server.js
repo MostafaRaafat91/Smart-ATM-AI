@@ -11,64 +11,83 @@ const PORT = process.env.PORT || 5000;
 // Middleware
 app.use(cors());
 app.use(bodyParser.json());
+app.use(express.static('public')); // Serve static files if needed
 
-// Add this line to serve static files from a public directory (optional)
-app.use(express.static('public')); // Uncomment if you have a public folder for static files
+// ATM Data Structure
+let atms = {}; // Object to hold ATM data
 
 // Route for the root URL
 app.get('/', (req, res) => {
-    res.send('Welcome to the Smart ATM API!'); // Simple response for the root URL
+    res.send('Welcome to the Smart ATM API!');
 });
 
-const upload = multer({ dest: 'uploads/' }); // Folder to store uploaded images
+// Add an ATM
+app.post('/api/atms/add', (req, res) => {
+    const { atmId } = req.body;
+    if (!atmId) {
+        return res.status(400).json({ success: false, message: "ATM ID is required." });
+    }
+    
+    atms[atmId] = { status: 'in service', connected: true };
+    res.json({ success: true, message: `ATM ${atmId} added successfully.` });
+});
+
+// Remove an ATM
+app.post('/api/atms/remove', (req, res) => {
+    const { atmId } = req.body;
+    if (!atms[atmId]) {
+        return res.status(404).json({ success: false, message: "ATM not found." });
+    }
+    
+    delete atms[atmId];
+    res.json({ success: true, message: `ATM ${atmId} removed successfully.` });
+});
+
+// Connect an ATM
+app.post('/api/atms/connect', (req, res) => {
+    const { atmId } = req.body;
+    if (!atms[atmId]) {
+        return res.status(404).json({ success: false, message: "ATM not found." });
+    }
+    
+    atms[atmId].connected = true;
+    atms[atmId].status = 'in service';
+    res.json({ success: true, message: `ATM ${atmId} connected successfully.` });
+});
+
+// Disconnect an ATM
+app.post('/api/atms/disconnect', (req, res) => {
+    const { atmId } = req.body;
+    if (!atms[atmId]) {
+        return res.status(404).json({ success: false, message: "ATM not found." });
+    }
+    
+    atms[atmId].connected = false;
+    atms[atmId].status = 'out of service';
+    res.json({ success: true, message: `ATM ${atmId} disconnected successfully.` });
+});
 
 // Mock user data for personalization
 const users = {
     '123456789': {
         name: 'John Doe',
         transactionHistory: [200, 150, 300, 50, 100],
+        pictureUrl: 'path_to_picture.jpg' // Add user pictures here
     },
 };
 
 // Mock login endpoint
 app.post('/api/login', (req, res) => {
     const { accountNumber, pin } = req.body;
-    // Mock validation (replace with real authentication logic)
-    if (accountNumber === '123456789' && pin === '1234') {
+    
+    if (users[accountNumber] && pin === '1234') { // Example validation
         res.json({ success: true, user: users[accountNumber] });
     } else {
         res.json({ success: false });
     }
 });
 
-// Facial Recognition Endpoint
-app.post('/api/face-recognition', upload.single('image'), async (req, res) => {
-    const imagePath = req.file.path;
-    // Here you would implement your facial recognition logic
-    const recognized = true; // Replace with actual recognition result
-    if (recognized) {
-        res.json({ success: true });
-    } else {
-        res.json({ success: false });
-    }
-});
-
-// QR Code Scanning Endpoint
-app.post('/api/scan-qr', upload.single('qrImage'), async (req, res) => {
-    const imagePath = req.file.path;
-    Jimp.read(imagePath).then((image) => {
-        const qr = new QRCode();
-        qr.callback = (err, value) => {
-            if (err) {
-                return res.json({ success: false });
-            }
-            res.json({ success: true, data: value.result });
-        };
-        qr.decode(image.bitmap);
-    }).catch(err => {
-        res.json({ success: false });
-    });
-});
+// Other existing endpoints...
 
 // Start the server
 app.listen(PORT, () => {

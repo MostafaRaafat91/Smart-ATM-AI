@@ -9,10 +9,22 @@
 <body>
     <div class="atm-container">
         <img id="atm-image" src="images/atm_in_service.png" alt="ATM" />
-        <h1>ATM Simulator</h1>
+        <h1>Hello! Please use your barcode or face to make a transaction.</h1>
         <div id="status-message"></div>
-        <input type="text" id="accountNumber" placeholder="Account Number" />
-        <input type="password" id="pin" placeholder="PIN" />
+
+        <!-- Voice Instruction Button -->
+        <button id="voice-instruction-button">Play Voice Instruction</button>
+
+        <!-- Input for Amount -->
+        <input type="number" id="amount" placeholder="Enter amount to dispense" />
+
+        <!-- Barcode Input for Payment -->
+        <input type="text" id="barcode" placeholder="Enter barcode for payment" />
+
+        <!-- Wallet Transfer Inputs -->
+        <input type="text" id="wallet-number" placeholder="Wallet Number" />
+        <input type="text" id="transaction-id" placeholder="Transaction ID" />
+
         <button id="login-button">Login</button>
         <button id="logout-button" style="display:none;">Logout</button>
     </div>
