@@ -8,8 +8,17 @@ const Jimp = require('jimp'); // For image processing
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+// Middleware
 app.use(cors());
 app.use(bodyParser.json());
+
+// Add this line to serve static files from a public directory (optional)
+app.use(express.static('public')); // Uncomment if you have a public folder for static files
+
+// Route for the root URL
+app.get('/', (req, res) => {
+    res.send('Welcome to the Smart ATM API!'); // Simple response for the root URL
+});
 
 const upload = multer({ dest: 'uploads/' }); // Folder to store uploaded images
 
@@ -61,6 +70,7 @@ app.post('/api/scan-qr', upload.single('qrImage'), async (req, res) => {
     });
 });
 
+// Start the server
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
