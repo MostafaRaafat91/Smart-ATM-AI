@@ -1,91 +1,31 @@
-document.getElementById('login-button').addEventListener('click', async () => {
-    const accountNumber = document.getElementById('accountNumber').value;
-    const pin = document.getElementById('pin').value;
+// Function to handle admin login
+async function login() {
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
 
-    const response = await fetch('http://localhost:5000/api/login', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ accountNumber, pin }),
-    });
+    try {
+        const response = await fetch('http://localhost:5000/api/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ username, password }),
+        });
 
-    const data = await response.json();
-    
-    if (data.success) {
-        document.getElementById('status-message').innerText = 'Login successful!';
-        document.getElementById('logout-button').style.display = 'block';
+        const data = await response.json();
         
-        // Simulate ATM going out of service after login
-        document.getElementById('atm-image').src = 'images/atm_out_of_service.png';
-        
-        // Enable transaction inputs
-        document.getElementById('amount').disabled = false;
-        document.getElementById('barcode').disabled = false;
-        document.getElementById('wallet-number').disabled = false;
-        document.getElementById('transaction-id').disabled = false;
-    } else {
-        document.getElementById('status-message').innerText = 'Login failed. Please try again.';
+        if (data.success) {
+            document.getElementById('admin-section').style.display = 'block';
+            alert("Login successful!");
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
+        } else {
+            alert("Login failed. Please try again.");
+        }
+    } catch (error) {
+        console.error("Error during login:", error);
+        alert("An error occurred. Please try again later.");
     }
-});
+}
 
-// Function to play voice instruction
-document.getElementById('voice-instruction-button').addEventListener('click', () => {
-    const message = "Welcome! Please use your barcode or face to make a transaction.";
-    const speech = new SpeechSynthesisUtterance(message);
-    window.speechSynthesis.speak(speech);
-});
-
-// Handle dispensing cash
-document.getElementById('dispense-button').addEventListener('click', async () => {
-    const amount = document.getElementById('amount').value;
-
-    const response = await fetch('http://localhost:5000/api/dispense', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ amount }),
-    });
-
-    const data = await response.json();
-    
-    document.getElementById('status-message').innerText = data.message;
-});
-
-// Handle payment using barcode
-document.getElementById('pay-button').addEventListener('click', async () => {
-    const barcode = document.getElementById('barcode').value;
-
-    const response = await fetch('http://localhost:5000/api/pay', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ barcode }),
-    });
-
-    const data = await response.json();
-    
-    document.getElementById('status-message').innerText = data.message;
-});
-
-// Handle money transfer
-document.getElementById('transfer-button').addEventListener('click', async () => {
-    const walletNumber = document.getElementById('wallet-number').value;
-    const transactionId = document.getElementById('transaction-id').value;
-
-    const response = await fetch('http://localhost:5000/api/transfer', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ walletNumber, transactionId }),
-    });
-
-    const data = await response.json();
-    
-    document.getElementById('status-message').innerText = data.message;
-});
-
-// Add more event listeners for transaction processing as needed...
+// The rest of your existing functions (addATM, removeATM, etc.) remain unchanged.

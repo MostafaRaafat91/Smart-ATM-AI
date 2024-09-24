@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ATM Management</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>ATM Management</h1>
+
+    <!-- Add ATM -->
+    <h2>Add ATM</h2>
+    <input type="text" id="add-atm-id" placeholder="ATM ID to Add" />
+    <button onclick="addATM()">Add ATM</button>
+
+    <!-- Remove ATM -->
+    <h2>Remove ATM</h2>
+    <input type="text" id="remove-atm-id" placeholder="ATM ID to Remove" />
+    <button onclick="removeATM()">Remove ATM</button>
+
+    <!-- Connect ATM -->
+    <h2>Connect ATM</h2>
+    <input type="text" id="connect-atm-id" placeholder="ATM ID to Connect" />
+    <button onclick="connectATM()">Connect ATM</button>
+
+    <!-- Disconnect ATM -->
+    <h2>Disconnect ATM</h2>
+    <input type="text" id="disconnect-atm-id" placeholder="ATM ID to Disconnect" />
+    <button onclick="disconnectATM()">Disconnect ATM</button>
+
+    <!-- Add User -->
+    <h2>Add User</h2>
+    <input type="text" id="user-account-number" placeholder="Account Number" />
+    <input type="text" id="user-name" placeholder="User Name" />
+    <input type="text" id="user-picture-url" placeholder="Picture URL (optional)" />
+    <button onclick="addUser()">Add User</button>
+
+    <!-- Link back to ATM Simulator -->
+    <h2><a href="index.html">Back to ATM Simulator</a></h2>
+
+    <script src="../script.js"></script> <!-- Adjust path if necessary -->
+</body>
+</html>
