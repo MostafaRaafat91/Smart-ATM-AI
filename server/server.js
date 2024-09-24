@@ -39,6 +39,7 @@ const authenticateUser = (req, res, next) => {
     }
 };
 
+
 // Add an ATM
 app.post('/api/atms/add', authenticateUser, (req, res) => {
     const { atmId } = req.body;
