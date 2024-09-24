@@ -1,0 +1,10 @@
+{
+    "name": "Smart ATM Development",
+    "image": "mcr.microsoft.com/devcontainers/universal:2",
+    "features": {
+        "node": "lts",
+        "git": "latest"
+    },
+    "forwardPorts": [3000],
+    "postCreateCommand": "npm install"
+}
