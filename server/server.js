@@ -1,7 +1,6 @@
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const multer = require('multer');
 const fs = require('fs');
 const path = require('path');
 
@@ -11,7 +10,7 @@ const PORT = process.env.PORT || 5000;
 // Middleware
 app.use(cors());
 app.use(bodyParser.json());
-app.use(express.static('public')); // Serve static files if needed
+app.use(express.static(path.join(__dirname, '../client'))); // Serve static files from 'client' directory
 
 // Load users from a JSON file (for simplicity)
 let users = {};
@@ -26,7 +25,25 @@ let atms = {}; // Object to hold ATM data
 
 // Route for the root URL
 app.get('/', (req, res) => {
-    res.send('Welcome to the Smart ATM API!');
+    res.sendFile(path.join(__dirname, '../client/index.html')); // Serve the index.html file
+});
+
+// Route for the ATM management page
+app.get('/atm_management', (req, res) => {
+    res.sendFile(path.join(__dirname, '../client/atm_management.html')); // Serve the atm_management.html file
+});
+
+// Login endpoint
+app.post('/api/login', (req, res) => {
+    const { username, password } = req.body;
+    console.log("Received Username:", username);
+    console.log("Received Password:", password);
+    
+    if (users[username] && users[username].password === password) {
+        res.json({ success: true });
+    } else {
+        res.json({ success: false });
+    }
 });
 
 // Authentication middleware
@@ -38,7 +55,6 @@ const authenticateUser = (req, res, next) => {
         res.status(401).json({ success: false, message: "Unauthorized" });
     }
 };
-
 
 // Add an ATM
 app.post('/api/atms/add', authenticateUser, (req, res) => {

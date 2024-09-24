@@ -15,7 +15,7 @@ async function login() {
         const data = await response.json();
         
         if (data.success) {
-            document.getElementById('admin-section').style.display = 'block';
+            document.getElementById('admin-section').style.display = 'block'; // Show admin section
             alert("Login successful!");
             document.getElementById('username').value = '';
             document.getElementById('password').value = '';
@@ -28,4 +28,4 @@ async function login() {
     }
 }
 
-// The rest of your existing functions (addATM, removeATM, etc.) remain unchanged.
+// Other existing functions (addATM, removeATM, etc.) remain unchanged.
