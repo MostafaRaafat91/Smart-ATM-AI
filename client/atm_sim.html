@@ -2,35 +2,52 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name=viewport content=width=device-width, initial-scale=1.0">
     <title>ATM Simulator</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel=stylesheet href=styles.css> <!-- Link to your CSS file -->
 </head>
 <body>
-    <div class="atm-container">
-        <img id="atm-image" src="images/atm_in_service.png" alt="ATM" />
-        <h1>Hello! Please use your barcode or face to make a transaction.</h1>
-        <div id="status-message"></div>
 
-        <!-- Voice Instruction Button -->
-        <button id="voice-instruction-button">Play Voice Instruction</button>
+<div class=container>
 
-        <!-- Input for Amount -->
-        <input type="number" id="amount" placeholder="Enter amount to dispense" />
+<h1>ATM Simulator</h1>
 
-        <!-- Barcode Input for Payment -->
-        <input type="text" id="barcode" placeholder="Enter barcode for payment" />
+<!-- Instructions or welcome message -->
+<p>Welcome to the ATM Simulator! Please insert your card.</p>
 
-        <!-- Wallet Transfer Inputs -->
-        <input type="text" id="wallet-number" placeholder="Wallet Number" />
-        <input type="text" id="transaction-id" placeholder="Transaction ID" />
+<!-- Video element for displaying the camera feed (if needed) -->
+<video id=video width=320 height=240 autoplay></video>
 
-        <button id="login-button">Login</button>
-        <button id="logout-button" style="display:none;">Logout</button>
+<!-- Input fields for barcode and wallet number -->
+<label for=barcode>Barcode:</label><br/>
+<input type=text id=barcode placeholder='Enter your barcode'><br/>
 
-       
-    </div>
+<label for=wallet-number>Wallet Number:</label><br/>
+<input type=text id=wallet-number placeholder='Enter wallet number'><br/>
 
-    <script src="script.js"></script>
+<!-- Submit button -->
+<button onclick='submitTransaction()'>Submit Transaction</button>
+
+<!-- Link back to management page -->
+<h2><a href="/atm_management">Back to Admin Panel</a></h2>
+
+<script src="../script.js"></script> <!-- Adjust path if necessary -->
+
+<script>
+// Access the user's webcam and start video capture
+navigator.mediaDevices.getUserMedia({ video: true })
+.then(stream => {
+   const videoElement = document.getElementById('video');
+   videoElement.srcObject = stream;
+   videoElement.play();
+})
+.catch(err => {
+   console.error("Error accessing webcam:", err);
+   alert("Unable to access webcam. Please check permissions.");
+});
+</script>
+
+</div>
+
 </body>
 </html>
