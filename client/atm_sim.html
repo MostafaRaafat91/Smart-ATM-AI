@@ -2,52 +2,42 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name=viewport content=width=device-width, initial-scale=1.0">
-    <title>ATM Simulator</title>
-    <link rel=stylesheet href=styles.css> <!-- Link to your CSS file -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ATM Simulation</title>
+    <link rel="stylesheet" href="../styles.css"> <!-- Link to your CSS file -->
 </head>
 <body>
+    <div class="container">
+        <h1>ATM Simulation</h1>
 
-<div class=container>
+        <!-- Start Simulation Button -->
+        <button onclick="startATMSimulation()">Start ATM Simulation</button>
 
-<h1>ATM Simulator</h1>
+        <!-- Face Recognition Section -->
+        <div id="face-recognition" style="display: none;">
+            <h2>Face Recognition</h2>
+            <button onclick="startFaceRecognition()">Start Face Recognition</button>
+            <div id="face-status"></div>
+        </div>
 
-<!-- Instructions or welcome message -->
-<p>Welcome to the ATM Simulator! Please insert your card.</p>
+        <!-- Transaction Section -->
+        <div id="transaction-section" style="display: none;">
+            <h2>ATM Transactions</h2>
+            <label for="amount">Enter Amount:</label>
+            <input type="number" id="amount" placeholder="Enter amount" required />
 
-<!-- Video element for displaying the camera feed (if needed) -->
-<video id=video width=320 height=240 autoplay></video>
+            <button onclick="performTransaction()">Withdraw</button>
 
-<!-- Input fields for barcode and wallet number -->
-<label for=barcode>Barcode:</label><br/>
-<input type=text id=barcode placeholder='Enter your barcode'><br/>
+            <!-- Display transaction message -->
+            <div id="transaction-message" style="color: green;"></div>
+            <div id="transaction-error-message" style="color: red;"></div>
+        </div>
 
-<label for=wallet-number>Wallet Number:</label><br/>
-<input type=text id=wallet-number placeholder='Enter wallet number'><br/>
+        <!-- Sound AI Interaction -->
+        <button onclick="playSound()">Hello, Talk to Me</button>
 
-<!-- Submit button -->
-<button onclick='submitTransaction()'>Submit Transaction</button>
+    </div>
 
-<!-- Link back to management page -->
-<h2><a href="/atm_management">Back to Admin Panel</a></h2>
-
-<script src="../script.js"></script> <!-- Adjust path if necessary -->
-
-<script>
-// Access the user's webcam and start video capture
-navigator.mediaDevices.getUserMedia({ video: true })
-.then(stream => {
-   const videoElement = document.getElementById('video');
-   videoElement.srcObject = stream;
-   videoElement.play();
-})
-.catch(err => {
-   console.error("Error accessing webcam:", err);
-   alert("Unable to access webcam. Please check permissions.");
-});
-</script>
-
-</div>
-
+    <script src="../script.js"></script> <!-- Link to your JavaScript file -->
 </body>
 </html>

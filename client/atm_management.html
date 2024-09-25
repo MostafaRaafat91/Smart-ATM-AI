@@ -7,126 +7,23 @@
     <link rel="stylesheet" href="styles.css"> <!-- Link to your CSS file -->
 </head>
 <body>
-    <h1>ATM Management</h1>
+    <div class="container">
+        <h1>ATM Management</h1>
 
-    <!-- Login Section -->
-    <h2>Admin Login</h2>
-    <label for="username">Username:</label>
-    <input type="text" id="username" placeholder="Enter your username" />
-    
-    <label for="password">Password:</label>
-    <input type="password" id="password" placeholder="Enter your password" />
-    
-    <button onclick="login()">Login</button>
+        <!-- Button to start ATM Simulation -->
+        <button onclick="startATMSimulation()">Start ATM Simulation</button>
 
-    <div id="admin-section" style="display:none;">
-        <!-- ATM Management Section -->
-        <fieldset>
-            <legend>ATM Management</legend>
-            <!-- Add ATM -->
-            <h3>Add ATM</h3>
-            <label for="add-atm-id">ATM ID:</label>
-            <input type="text" id="add-atm-id" placeholder="ATM ID to Add" />
-            
-            <label for="add-atm-ip">ATM IP Address:</label>
-            <input type="text" id="add-atm-ip" placeholder="ATM IP Address" />
-            
-            <label for="add-atm-type">ATM Type:</label>
-            <input type="text" id="add-atm-type" placeholder="ATM Type" />
-            <button onclick="addATM()">Add ATM</button>
+        <!-- Other management functionalities... -->
 
-            <!-- Remove ATM -->
-            <h3>Remove ATM</h3>
-            <label for="remove-atm-id">ATM ID:</label>
-            <input type="text" id="remove-atm-id" placeholder="ATM ID to Remove" />
-            <button onclick="removeATM()">Remove ATM</button>
+    </div>
 
-            <!-- Connect/Disconnect ATM -->
-            <h3>Connect/Disconnect ATM</h3>
-            <label for="connect-atm-id">Connect ATM ID:</label>
-            <input type="text" id="connect-atm-id" placeholder="ATM ID to Connect" />
-            <button onclick="connectATM()">Connect ATM</button>
-
-            <label for="disconnect-atm-id">Disconnect ATM ID:</label>
-            <input type="text" id="disconnect-atm-id" placeholder="ATM ID to Disconnect" />
-            <button onclick="disconnectATM()">Disconnect ATM</button>
-        </fieldset>
-
-        <!-- Transaction Section -->
-        <fieldset>
-            <legend>Transaction Section</legend>
-            <!-- Barcode Input -->
-            <h3>Enter Barcode</h3>
-            <label for="transaction-barcode">Barcode:</label>
-            <input type="text" id="transaction-barcode" placeholder="Enter Barcode Here" />
-
-            <!-- Wallet Number Input -->
-            <label for="wallet-number-transaction">Wallet Number:</label>
-            <input type="text" id="wallet-number-transaction" placeholder="Enter Wallet Number Here" />
-
-            <!-- Submit Button -->
-            <button onclick="submitTransaction()">Submit Transaction</button>
-        </fieldset>
-
-        <!-- User Management Section -->
-        <fieldset>
-            <legend>User Management</legend>
-            <!-- Add User -->
-            <h3>Add User</h3>
-            <label for="new-username">New Username:</label>
-            <input type="text" id="new-username" placeholder="New Username" />
-
-            <label for "new-password">New Password:</label >
-             <input type "password "id = "new-password "placeholder = "New Password " />
-
-             <label for = "user-role ">User Role:</label >
-             <select id = "user-role ">
-                <option value = "user ">User</option >
-                <option value = "manager ">Manager</option >
-                <option value = "admin ">Admin</option >
-             </select >
-
-             <button onclick = "addUser()">Add User</button >
-
-          </fieldset >
-
-         <!-- Client Management Section -->
-         <fieldset >
-             <legend >Client Management </legend >
-             <h3 >Add Client </h3 >
-             <label for = "client-name ">Client Name:</label >
-             <input type = "text "id = "client-name "placeholder = "Client Name " />
-
-             <label for = "client-barcode ">Barcode:</label >
-             <input type = "text "id = "client-barcode "placeholder = "Barcode " />
-
-             <label for = "client-wallet-number ">Wallet Number:</label >
-             <input type = "text "id = "client-wallet-number "placeholder = "Wallet Number " />
-
-             <label for = "face-id ">Face ID:</label >
-             <input type = "text "id = "face-id "placeholder = "Face ID " />
-             <button onclick = "addClient()">Add Client</button >
-
-             <h2 >Remove Client </h2 >
-             <label for = "remove-barcode ">Barcode of Client to Remove:</label >
-             <input type = "text "id = "remove-barcode "placeholder = "Barcode of Client to Remove " />
-             <button onclick = "removeClient()">Remove Client </button >
-
-          </fieldset >
-
-         <!-- Feedback Message Section -->
-         <div id = "feedback-message "> </div >
-
-         <!-- Link back to Main Page -->
-         <h2 ><a href = "/ ">Back to Main Page </a ></h2 >
-
-         <!-- Video element for webcam access -->
-         <h2 >Face Recognition </h2 >
-         <video id = "video "width = "320 "height = "240"></video >
-         <button id = "capture-button ">Capture Face </button >
-
-      </div >
-
-     <script src="../script.js"></script> <!-- Adjust path if necessary -->
- </body >
- </html >
+    <script src="../script.js"></script> <!-- Link to your JavaScript file -->
+    <script>
+      // Function to start the ATM simulation
+      function startATMSimulation() {
+          console.log("ATM Simulation started"); // Log message for debugging
+          window.location.href = 'atm_sim.html'; // Redirect to ATM simulation page
+      }
+    </script>
+</body>
+</html>
