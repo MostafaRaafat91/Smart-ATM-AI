@@ -9,8 +9,20 @@
 <body>
     <div class="container">
         <h1>Welcome to Smart ATM Management!</h1>
-        <p>Please log in to access the management features.</p>
-        <a href="/atm_management"><button id="manage-atm-button">Go to ATM Management</button></a>
+        <h2>Admin Login</h2>
+
+        <label for="username">Username:</label>
+        <input type="text" id="username" placeholder="Enter your username" required />
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" placeholder="Enter your password" required />
+
+        <button onclick="login()">Login</button>
+
+        <!-- Display error messages -->
+        <div id="error-message" style="color: red; display: none;"></div>
     </div>
+
+    <script src="../script.js"></script> <!-- Link to your JavaScript file -->
 </body>
 </html>
